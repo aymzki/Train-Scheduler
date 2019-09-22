@@ -14,6 +14,7 @@ var firebaseConfig = {
   //Reference to database
   var database = firebase.database();
 
+  
 // var trainName
 // var whereTo 
 // var firstTime -- in military time
