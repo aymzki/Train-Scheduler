@@ -18,12 +18,11 @@ var database = firebase.database();
 $("#submit-btn").on("click", function(event) {
   event.preventDefault();
 
-
   // Grab user inputs
-  var trainName = $("name-input").val().trim();
-  var whereTo = $("destination-input").val().trim();
-  var firstTime = moment($("firsttime-input").val().trim(), "HH:mm").format("LT");
-  var freq = $("freq-input").val().trim();
+  var trainName = $("#name-input").val().trim();
+  var whereTo = $("#destination-input").val().trim();
+  var firstTime = $("#firsttime-input").val().trim();
+  var freq = $("#freq-input").val().trim();
 
   //Create local temporary object for all this data
   var newTrain = {
@@ -53,10 +52,8 @@ $("#submit-btn").on("click", function(event) {
 });
 
 //Create Firebase event for adding train info to database
-//Also add row in html when there is data input
-
 database.ref().on("child_added", function(childSnapshot) {
-  console.log(childSnapshot.val());
+  //console.log(childSnapshot.val());
 
   //Store everything into a variable
   var trainName = childSnapshot.val().name;
@@ -65,13 +62,44 @@ database.ref().on("child_added", function(childSnapshot) {
   var freq = childSnapshot.val().frequency;
 
   //Train Info
-  
-  console.log(trainName);
-  console.log(whereTo);
-  console.log(firstTime);
-  console.log(freq);
+  // console.log(trainName);
+  // console.log(whereTo);
+  // console.log(firstTime);
+  // console.log(freq);
 
-  //Clean up the time
+  //Clean up the time 
+
+  var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+  console.log(firstTimeConverted);
+
+  var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+  console.log("DIFFERENCE IN TIME: " + diffTime);
+
+  var tRemainder = diffTime % freq;
+  console.log(tRemainder);
+
+
+  //Make calculation for Minutes Away moment.js
+
+  var tMinutesTillTrain = freq - tRemainder;
+  console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+  //Make calculation for Next Arrival moment.js
+
+  var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+  console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
+
+  
+  
   //Create new row
+  var makeRow = $("<tr>").append(
+    $("<td>").text(trainName),
+    $("<td>").text(whereTo),
+    $("<td>").text(freq),
+    $("<td>").text(moment(nextTrain).format("HH:mm")),
+    $("<td>").text(tMinutesTillTrain),
+  );
   //Append new row to the table
+  $(".trainTable").append(makeRow);
 });
+
