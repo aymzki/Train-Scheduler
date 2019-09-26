@@ -6,10 +6,13 @@ h1 {
   text-shadow: 2px 2px 4px #000000;
   font-family: 'Turret Road', cursive;
   font-weight: bold;
+  text-align: center;
+  
 }
 
 .tblhdr {
-    font-size: 20px;
+    font-size: 18px;
+    font-family: 'Turret Road', cursive;
     color: white;
 }
 
@@ -27,12 +30,16 @@ td {
     margin: auto;
     width: 50%;
     border-bottom: 30px;
+   
 }
 
 .panel-heading {
-    font-size: 20px;
+    font-size: 23px;
     color: white;
     font-family: 'Turret Road', cursive;
+}
+#submit-btn {
+   margin: 10px;
 }
 
 label {
