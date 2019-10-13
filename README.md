@@ -1,18 +1,19 @@
 # Train-Scheduler
 
-A train scheduling app that takes the user's inputs, loads it into Firebase, then returns it as text on the site with conversions to predict the next train arrival time and how many minutes away the train is. 
+A train scheduling web application that displays train arrival and departure data that the user submits.
 
-## How It Works
+## How To Use
 
 * Type in the information for your train at the submit form at the bottom of the page.
 * The parameters are train name, destination, first train time, and frequency.
 * Click submit
 * Your new train's name, destination, frequency, as well as the current next arrival and minutes away will be displayed at the bottom of the list.
 
+## How It Works
 
-## Motivation
-
-Assigment in Coding Bootcamp; testing out skills and knowledge.
+Firebase is used to record train arrival and departure data that the user submits. 
+The app retrieves and manipulates this information with Javascript/jQuery.
+Moment.js is used to calculate the arrival time and minutes away based on user input. 
 
 ## Built With
 
